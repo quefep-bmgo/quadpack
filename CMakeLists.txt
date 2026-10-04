@@ -23,8 +23,9 @@ endif()
 
 if(QUADPACK_BUILD_TESTS)
     enable_testing()
-    add_executable(quadpack_tests tests/test_greedy_2d.cpp src/greedy_2d.cpp)
-    target_include_directories(quadpack_tests PRIVATE src)
+    add_executable(quadpack_tests tests/test_greedy_2d.cpp tests/test_cull.cpp src/greedy_2d.cpp
+                               src/cull.cpp)
+    target_include_directories(quadpack_tests PRIVATE src tests)
     target_link_libraries(quadpack_tests PRIVATE quadpack_warnings)
-    add_test(NAME greedy_2d COMMAND quadpack_tests)
+    add_test(NAME unit COMMAND quadpack_tests)
 endif()

@@ -149,6 +149,8 @@ void test_degenerate() {
 
 }  // namespace
 
+int run_cull_tests();
+
 int main() {
     test_worked_example();
     test_degenerate();
@@ -156,6 +158,11 @@ int main() {
     sweep(4, 4);
     sweep(3, 6);
     sweep(5, 5);
+
+    failures += run_cull_tests();
+    if (failures == 0) {
+        std::printf("cull_in_plane ok\n");
+    }
 
     if (failures != 0) {
         std::printf("%d failures\n", failures);
