@@ -1,0 +1,51 @@
+name: Feature request
+description: Something is missing that the library should have
+title: ""
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Open an issue before anything that is not a small fix. A small fix is a
+        typo, a wrong comment, or a rename, and those do not need one.
+
+        One issue per problem. If you found two things, open two issues.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What is missing
+      description: The capability, not the solution you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why you need it
+      description: |
+        What you are trying to do, and what you are doing instead today. This
+        is the part that decides whether it lands, so be concrete.
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: What the call would look like
+      description: |
+        Optional, and only if you have an idea. Sketch the signature. If it
+        would change an existing type, say which one and how.
+    validations:
+      required: false
+
+  - type: textarea
+    id: cost
+    attributes:
+      label: What it costs
+      description: |
+        Optional. If you know this is expensive, say so. A feature that costs
+        2x on the main path needs a different argument from one that costs
+        nothing.
+    validations:
+      required: false

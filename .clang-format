@@ -1,0 +1,65 @@
+# Formatting follows the LLVM style with four space indent, which is what the
+# C++ standard libraries and most of the prior art in this space use.
+#
+# The rule of thumb for this repo is that a reformat should never be the
+# interesting part of a diff. If a pull request touches more than a handful of
+# lines outside the code it is about, the formatting drifted and that is a
+# separate change.
+
+BasedOnStyle: LLVM
+
+Language: Cpp
+
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: true
+AllowShortLambdasOnASingleLine: Inline
+
+BreakBeforeBraces: Attach
+BreakConstructorInitializers: BeforeColon
+ConstructorInitializerIndentWidth: 4
+PackConstructorInitializers: BinPack
+
+IndentCaseLabels: false
+IndentPPDirectives: AfterHash
+NamespaceIndentation: None
+FixNamespaceComments: true
+
+PointerAlignment: Left
+DerivePointerAlignment: false
+SpaceAfterTemplateKeyword: false
+
+AlignOperands: true
+AlignConsecutiveAssignments: false
+AlignTrailingComments: true
+
+# The bit manipulation in the mesher reads worse with a wrapped expression,
+# so leave long masks on one line rather than folding them.
+BinPackArguments: false
+BinPackParameters: false
+AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: true
+
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+InsertBraces: true
+RemoveBracesLLVM: false
+
+IncludeBlocks: Preserve
+SortIncludes: CaseSensitive
+
+Language: Json
+IndentWidth: 2
+
+Language: Proto
+IndentWidth: 2

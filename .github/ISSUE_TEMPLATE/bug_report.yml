@@ -1,0 +1,92 @@
+name: Bug report
+description: Something gives a wrong answer, crashes, or misbehaves
+title: ""
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem and why it matters. Include the failing input, or
+        the steps that reproduce it.
+
+        If you trimmed anything from a compiler message, put it back. The shape
+        of the message is usually the clue.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What goes wrong
+      description: What you expected, and what you got instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: input
+    attributes:
+      label: Failing input
+      description: |
+        The chunk, however you can give it to us. A generator and its seed is
+        the best thing. A dump from testdata/repro works. A hex dump works.
+        A description of the shape works if nothing else does.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Numbered, starting from a fresh checkout.
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Actual error text
+      description: |
+        The whole message, untrimmed, from the first line to the last. Include
+        the compiler name and version and the exact flags if it is a build
+        failure.
+      render: text
+    validations:
+      required: false
+
+  - type: input
+    id: seed
+    attributes:
+      label: Seed
+      description: |
+        If this came out of a random test, the seed in decimal and in hex, plus
+        the extent, the density and the generator mode. Without all of those the
+        failure will not reproduce.
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: quadpack version or commit
+      description: The tag, or the first seven characters of the commit.
+    validations:
+      required: true
+
+  - type: input
+    id: machine
+    attributes:
+      label: Machine and toolchain
+      description: CPU, operating system, compiler and version, build type, and
+        whether sanitizers were on.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Sanitizers
+      options:
+        - label: Reproduces with ASan and UBSan on
+        - label: Reproduces in Release only, not Debug
+        - label: Reproduces on MSVC only
+        - label: Reproduces on Apple Clang only

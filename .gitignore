@@ -1,0 +1,71 @@
+# build output
+build/
+build-*/
+out/
+cmake-build-*/
+_deps/
+CMakeUserPresets.json
+CMakeCache.txt
+CMakeFiles/
+CTestTestfile.cmake
+Testing/
+CTestCostData.txt
+install_manifest.txt
+compile_commands.json
+
+# credentials. .env.example is committed, .env never is.
+.env
+.env.local
+.env.*.local
+
+# cmake package output
+quadpackConfig.cmake
+quadpackConfigVersion.cmake
+quadpackTargets.cmake
+*Targets-*.cmake
+
+# binaries and objects
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.idb
+*.gcda
+*.gcno
+*.profraw
+*.profdata
+
+# sanitizers and coverage
+*.asan
+*.ubsan
+*.tsan
+
+# editors
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+.cache/
+
+# os
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Working notes kept alongside this checkout. Not part of the library.
+Mesh/
+notes/
+scratch/
+
+# reproducers from failing random tests are committed on purpose,
+# everything else under testdata is scratch
+testdata/scratch/

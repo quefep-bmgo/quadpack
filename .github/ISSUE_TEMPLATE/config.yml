@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Prior art, not a bug
+    url: https://github.com/cgerikj/binary-greedy-meshing/issues
+    about: If the behaviour matches binary-greedy-meshing, that is the reference implementation working as intended.
+  - name: The algorithm itself
+    url: https://0fps.net/2012/06/30/meshing-in-a-minecraft-game/
+    about: For why greedy meshing is shaped the way it is, and for the approximation bound.
