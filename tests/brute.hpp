@@ -42,38 +42,19 @@ class Brute {
         return cells_[(i * extent_ + j) * extent_ + k] != 0;
     }
 
-    // The visible faces of one in-plane slice, as a row of bits. plane is along
-    // face_axis, row is along the remaining axis, and the bits run along bit.
-    std::uint64_t visible_mask(int bit, int face_axis, bool positive, std::size_t plane,
-                               std::size_t row) const {
-        const auto row_axis = static_cast<std::size_t>(third(bit, face_axis));
-        std::uint64_t w = 0;
-        for (std::size_t k = 0; k < extent_; ++k) {
-            if (visible(bit, face_axis, positive, plane, row_axis, row, k)) {
-                w |= std::uint64_t{ 1 } << k;
-            }
-        }
-        return w;
-    }
-
-    bool visible(int bit, int face_axis, bool positive, std::size_t plane, std::size_t row_axis,
-                 std::size_t row, std::size_t k) const {
-        long p[3] = { 0, 0, 0 };
-        p[face_axis] = static_cast<long>(plane);
-        p[row_axis] = static_cast<long>(row);
-        p[bit] = static_cast<long>(k);
-
-        if (!solid(p[0], p[1], p[2])) {
+    bool visible_at(long x, long y, long z, int face_axis, bool positive) const {
+        if (!solid(x, y, z)) {
             return false;
         }
-        p[face_axis] += positive ? 1 : -1;
-        return !solid(p[0], p[1], p[2]);
+        long n[3] = { x, y, z };
+        n[face_axis] += positive ? 1 : -1;
+        return !solid(n[0], n[1], n[2]);
     }
 
-    static int third(int bit, int face_axis) {
-        for (int a = 0; a < 3; ++a) {
-            if (a != bit && a != face_axis) {
-                return a;
+    static int third(int a, int b) {
+        for (int i = 0; i < 3; ++i) {
+            if (i != a && i != b) {
+                return i;
             }
         }
         return -1;

@@ -33,4 +33,16 @@ std::vector<std::uint64_t> build_occupancy(const std::uint8_t* occupancy, const 
 std::vector<std::uint64_t> cull_in_plane(const std::vector<std::uint64_t>& occupancy, const Grid& g,
                                          BitAxis bit, int face_axis, bool positive);
 
+// Visible faces on the two directions along the bit axis itself.
+// out[(plane * extent[a0]) + row] holds one row, bit k set meaning the face at
+// local a0 position k is visible. plane runs along the bit axis, row along a0,
+// bits along a1.
+//
+// Not word-parallel the way cull_in_plane is. The run direction is the bit axis,
+// so every bit position is its own plane and the mask has to be gathered one bit
+// at a time across columns. Both the face and its neighbour are bits of the same
+// column word, so the neighbour is a shift within the word, not a different word.
+std::vector<std::uint64_t> cull_normal(const std::vector<std::uint64_t>& occupancy, const Grid& g,
+                                       BitAxis bit, bool positive);
+
 }  // namespace quadpack::detail

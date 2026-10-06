@@ -81,4 +81,34 @@ std::vector<std::uint64_t> cull_in_plane(const std::vector<std::uint64_t>& occup
     return out;
 }
 
+std::vector<std::uint64_t> cull_normal(const std::vector<std::uint64_t>& occupancy, const Grid& g,
+                                       BitAxis bit, bool positive) {
+    const std::size_t b = static_cast<std::size_t>(bit);
+    const std::size_t a0 = other_axis(bit, 0);
+    const std::size_t a1 = other_axis(bit, 1);
+    const std::size_t n_b = g.extent[b];
+    const std::size_t n_a0 = g.extent[a0];
+    const std::size_t n_a1 = g.extent[a1];
+    const std::size_t stride = g.padded[a1];
+
+    std::vector<std::uint64_t> out(n_b * n_a0, 0);
+
+    for (std::size_t p = 0; p < n_b; ++p) {
+        for (std::size_t r = 0; r < n_a0; ++r) {
+            const std::size_t base = (r + 1) * stride + 1;
+            std::uint64_t word = 0;
+            for (std::size_t k = 0; k < n_a1; ++k) {
+                const std::uint64_t col = occupancy[base + k];
+                const std::uint64_t here = (col >> (p + 1)) & 1;
+                const std::uint64_t across = (col >> (positive ? p + 2 : p)) & 1;
+                if (here & ~across) {
+                    word |= std::uint64_t{ 1 } << k;
+                }
+            }
+            out[p * n_a0 + r] = word;
+        }
+    }
+    return out;
+}
+
 }  // namespace quadpack::detail
